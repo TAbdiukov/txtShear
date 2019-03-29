@@ -350,5 +350,3 @@ Public Function is_waiting_mode(ByVal mode As Integer) As Boolean
         is_waiting_mode = False
     End If
 End Function
-
-

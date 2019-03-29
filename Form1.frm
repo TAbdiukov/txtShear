@@ -28,7 +28,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Pseudo-constants
+'' inner functions related
+Public TRUETYPE_FONTS_DELIMITER As String
+
 ' malloc variables
+'' input
 Public OutMode_local As Integer ' 0
 Public FontSize_local As Integer ' 1
 Public FontColor_local As Long ' 2
@@ -39,10 +44,27 @@ Public Angle_local As Long ' 6
 Public FontName_local As String ' 7
 Public txt_local As String ' 8
 
+Public fonts_TrueType As Variant
+Public fonts_TrueType_str As String
+
 Private Sub setup()
     ' Initialise form
     Me.AutoRedraw = True
     Me.Picture1.Visible = False
+    
+    ' Everything fonts related,
+    ' Since fonts require a form in MS Windows here goes
+    
+    '' Because font names clearly can't contain slashes
+    TRUETYPE_FONTS_DELIMITER = "/"
+    
+    '' luckily getting fonts list is VERY fast
+    '' however for TrueType fonts, one needs to traverse
+    '' And because objects are hard in VB string+split function require to be abused
+    fonts_TrueType_str = get_TrueType_fonts(TRUETYPE_FONTS_DELIMITER)
+    fonts_TrueType = Split(fonts_TrueType_str, TRUETYPE_FONTS_DELIMITER)
+    
+    'Clipboard.SetText fonts_TrueType_str 'DEBUG
 End Sub
 
 Private Sub Form_Click()
@@ -123,12 +145,18 @@ Private Sub Form_Load()
         Else
             CLI.Send "ERROR: Font is not a TrueType font (got: " _
              + FontName_local + ")"
+            show_TrueType_fonts
             API.quit API.ERR_NonTT
         End If
             
         ' FIN
         CLI.Send "Success"
         API.quit API.ERR_SUCCESS
+    ElseIf (argc = 1) Then
+        If (LCase(argw(0)) = "list") Then
+            show_TrueType_fonts
+            API.quit API.ERR_SUCCESS
+        End If
     Else
         CLI.Send "ERROR: Invalid number of args (got " + CStr(argc) + ")"
         showHelp
@@ -174,7 +202,46 @@ Public Sub showHelp()
     CLI.Sendln "<form_bg_col> - Canvas background colour. HEX notation, 000000-FFFFFF"
     CLI.Sendln "<ang> - Angle in degrees. -359 - 359"
     CLI.Sendln "<font> - Font name. Must be TrueType"
+    CLI.Sendln vbTab + "Tip: for Truetype fonts, run 'hwz list'"
     CLI.Sendln "<text> - Text to print"
+    
+    show_TrueType_fonts
     API.quit API.ERR_SUCCESS
 End Sub
 
+' since function requires a form it has to be put IN FORM not in code (lol)
+' since returning arrays is problematic in vb it returns a string
+' Usage: Split(get_TrueType_fonts(TRUETYPE_FONTS_DELIMITER), TRUETYPE_FONTS_DELIMITER)
+Public Function get_TrueType_fonts(delimiter As String) As String
+    Dim buf As String
+    Dim ret As String
+    Dim i As Long
+
+    buf = ""
+    ret = ""
+    i = 0
+    
+    ' iterate through fonts
+    For i = 0 To Screen.FontCount() - 1
+        buf = Screen.Fonts(i)
+        ' is current font is true type
+        If (IsFontTrueType(Me, buf)) Then
+            ' add it to the homemade array
+            ret = ret + buf + delimiter
+        End If
+    Next i
+    
+    get_TrueType_fonts = ret
+End Function
+
+Public Sub show_TrueType_fonts()
+    Dim listing As String
+    
+    CLI.SetTextColour CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
+    CLI.Sendln "TrueType fonts in your system:"
+    CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
+    
+    listing = Replace(fonts_TrueType_str, TRUETYPE_FONTS_DELIMITER, vbTab)
+    CLI.Sendln listing
+    
+End Sub
