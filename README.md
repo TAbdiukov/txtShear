@@ -49,7 +49,7 @@ For help information, just run:
     <form_y> - Canvas height
     <form_bg_col> - Canvas background colour. HEX notation, 000000-FFFFFF
     <ang> - Angle in degrees. -359 - 359
-    <font> - Font name. Must be TrueType
+    <font> - Font name. Must be TrueType. To list TrueType fonts, run 'hwz list'
     <text> - Text to print
     
 ## How to compile?
@@ -71,3 +71,11 @@ For help information, just run:
 6. Browse to your compiled copy of HWZ, pick *Console Application*, and then click on *Change Mode*.
 7. Done!
 
+## Example TrueType fonts
+	Courier Arial   Arial CYR       Arial Cyr       Courier New     Courier New CYR
+	Courier Courier New Cyr Lucida Console  Lucida Sans Unicode     Times New Roman
+	Times New Roman CYR     Times New Roman Cyr     Symbol  Verdana Arial Black
+	Comic Sans MS   Impact  Georgia Franklin Gothic Medium  Palatino Linotype
+	Tahoma  Trebuchet MS    Sylfaen Microsoft Sans Serif
+	
+	
