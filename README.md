@@ -37,10 +37,11 @@ For help information, just run:
       hwz 1 14 FF0000 500 500 FFFFFF 90 "Arial" "Text"
 
 ### Manual:
-    <out_mode> - Output mode. 3 modes currently supported
+    <out_mode> - Output mode. 4 modes currently supported
             * 1 - Use VB6 inbuilt form -> image functions. Outputs .bmp file
             * 2 - Use WinAPI effecient form -> image workarounds. Experimental
             * 3 - Print out. Use in combination w/ virt. printer, e.g. doPDF
+			* 4 - Do operations and then wait utill form_click (or until you kill the process). Use w/ automation tool combinations, e.g. AHK+PicPick
 
     <font_size> - Font size. 1-1368
     <font_col> - Font colour. HEX notation, 000000-FFFFFF
@@ -59,7 +60,11 @@ For help information, just run:
 
 3. Fire up **Microsoft Visual Basic 6.0**, open up the project.
 4. Go to File -> Make *.exe -> Save
-5. NirSoft's [Application Mode Changer](http://www.nirsoft.net/vb/console.zip) ([info](http://www.nirsoft.net/vb/console.html)), unpack the archive and then run the **appmodechange.exe**
+5. Patch the app for CLI use:
+* You can use my AMC patcher. For example,
+	amc C:\Projects\HWZ\hwz.exe 3
+
+* Or you can use the original Nirsoft's [Application Mode Changer](http://www.nirsoft.net/vb/console.zip) ([info](http://www.nirsoft.net/vb/console.html)), unpack the archive and then run the **appmodechange.exe**
 
 **Tip:** On my VM, for whatever reason the  **appmodechange.exe** fails to launch. As a workaround, you can run another **Microsoft Visual Basic 6.0** window, open up the **appmodechange.vbp** project, and then right from IDE, go to Run -> Run With Full Compile*
 

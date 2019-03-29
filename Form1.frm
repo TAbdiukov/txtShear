@@ -193,7 +193,7 @@ Public Sub showHelp()
     CLI.Sendln vbTab + "* 1: Use VB6 inbuilt form -> image functions. Outputs .bmp file"
     CLI.Sendln vbTab + "* 2: Use WinAPI effecient form -> image workarounds. Experimental"
     CLI.Sendln vbTab + "* 3: Print out. Use in combination w/ virt. printer, e.g. doPDF"
-    CLI.Sendln vbTab + "* 4: Do&wait till form_click. Use w/ automation combo, e.g. AHK+doPDF"
+    CLI.Sendln vbTab + "* 4: Do&wait till form_click. Use w/ automation combo, e.g. AHK+PicPick"
     CLI.Sendln ""
     CLI.Sendln "<font_size> - Font size. 1-1368"
     CLI.Sendln "<font_col> - Font colour. HEX notation, 000000-FFFFFF"
