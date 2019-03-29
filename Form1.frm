@@ -158,7 +158,7 @@ Private Sub Form_Load()
             API.quit API.ERR_SUCCESS
         End If
     Else
-        CLI.Send "ERROR: Invalid number of args (got " + CStr(argc) + ")"
+        ' CLI.Send "ERROR: Invalid number of args (got " + CStr(argc) + ")"
         showHelp
         
         API.quit API.ERR_ARGS
@@ -238,7 +238,7 @@ Public Sub show_TrueType_fonts()
     Dim listing As String
     
     CLI.SetTextColour CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
-    CLI.Sendln "TrueType fonts in your system:"
+    CLI.Sendln "TrueType fonts on your system:"
     CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
     
     listing = Replace(fonts_TrueType_str, TRUETYPE_FONTS_DELIMITER, vbTab)
