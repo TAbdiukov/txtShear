@@ -28,10 +28,27 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' malloc variables
+Public OutMode_local As Integer ' 0
+Public FontSize_local As Integer ' 1
+Public FontColor_local As Long ' 2
+Public FormX_local As Integer ' 3
+Public FormY_local As Integer  ' 4
+Public FormBG_local As Long ' 5
+Public Angle_local As Long ' 6
+Public FontName_local As String ' 7
+Public txt_local As String ' 8
+
 Private Sub setup()
     ' Initialise form
     Me.AutoRedraw = True
     Me.Picture1.Visible = False
+End Sub
+
+Private Sub Form_Click()
+    If (API.is_waiting_mode(OutMode_local)) Then
+        API.quit API.ERR_SUCCESS
+    End If
 End Sub
 
 Private Sub Form_Load()
@@ -51,19 +68,7 @@ Private Sub Form_Load()
         
     ' If number of arguments suffices
     If (argc >= 9) Then
-        'MsgBox "0"
         ' INPUT
-        ' malloc variables
-        Dim OutMode_local As Integer ' 0
-        Dim FontSize_local As Integer ' 1
-        Dim FontColor_local As Long ' 2
-        Dim FormX_local As Integer ' 3
-        Dim FormY_local As Integer  ' 4
-        Dim FormBG_local As Long ' 5
-        Dim Angle_local As Long ' 6
-        Dim FontName_local As String ' 7
-        Dim txt_local As String ' 8
-        
         'MsgBox "1"
         'Dim i As Integer
         'For i = 0 To 7
@@ -110,7 +115,7 @@ Private Sub Form_Load()
              Angle_local, txt_local
             'MsgBox "7"
             If (Err.Number > 0) Then
-                API.goto_VB_err
+                API.printErr
             Else
                 OutputForm Me, OutMode_local, API.UnixTime()
             End If
@@ -124,48 +129,52 @@ Private Sub Form_Load()
         ' FIN
         CLI.Send "Success"
         API.quit API.ERR_SUCCESS
-    ElseIf (argc = 0) Then ' If no args: display help
-        CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_BLUE Or CLI.FOREGROUND_INTENSITY
-        CLI.Sendln "HWZ - TEXT SKEWER" + " v" + VER
-        CLI.Sendln ""
-        
-        CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
-        CLI.Sendln "USAGE:"
-        CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
-        CLI.Sendln "hwz <out_mode> <font_size> <font_col> " & _
-         "<form_x> <form_y> <form_bg_col> <ang> " & _
-         Chr(34) & "<font>" & Chr(34) & " " & Chr(34) & "<text>" & Chr(34)
-        CLI.Sendln ""
-        
-        CLI.SetTextColour CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
-        CLI.Sendln "FOR EXAMPLE:"
-        CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
-        CLI.Sendln "hwz 1 14 FF0000 500 500 FFFFFF 90 " & _
-         Chr(34) & "Arial" & Chr(34) & " " & Chr(34) & "Text" & Chr(34)
-        CLI.Sendln ""
-        
-        CLI.SetTextColour CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE Or CLI.FOREGROUND_INTENSITY
-        CLI.Sendln "MANUAL:"
-        CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
-        CLI.Sendln "<out_mode> - Output mode. 3 modes currently supported"
-        CLI.Sendln vbTab + "* 1 - Use VB6 inbuilt form -> image functions. Outputs .bmp file"
-        CLI.Sendln vbTab + "* 2 - Use WinAPI effecient form -> image workarounds. Experimental"
-        CLI.Sendln vbTab + "* 3 - Print out. Use in combination w/ virt. printer, e.g. doPDF"
-        CLI.Sendln ""
-        CLI.Sendln "<font_size> - Font size. 1-1368"
-        CLI.Sendln "<font_col> - Font colour. HEX notation, 000000-FFFFFF"
-        CLI.Sendln "<form_x> - Canvas width"
-        CLI.Sendln "<form_y> - Canvas height"
-        CLI.Sendln "<form_bg_col> - Canvas background colour. HEX notation, 000000-FFFFFF"
-        CLI.Sendln "<ang> - Angle in degrees. -359 - 359"
-        CLI.Sendln "<font> - Font name. Must be TrueType"
-        CLI.Sendln "<text> - Text to print"
-        API.quit API.ERR_SUCCESS
     Else
         CLI.Send "ERROR: Invalid number of args (got " + CStr(argc) + ")"
+        showHelp
+        
         API.quit API.ERR_ARGS
     End If
         
 End Sub
 
+Public Sub showHelp()
+    CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_BLUE Or CLI.FOREGROUND_INTENSITY
+    CLI.Sendln "HWZ - TEXT SKEWER" + " v" + VER
+    CLI.Sendln ""
+    
+    CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
+    CLI.Sendln "USAGE:"
+    CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
+    CLI.Sendln "hwz <out_mode> <font_size> <font_col> " & _
+     "<form_x> <form_y> <frm_bg_col> <ang> " & _
+     Chr(34) & "<font>" & Chr(34) & " " & Chr(34) & "<text>" & Chr(34)
+    CLI.Sendln ""
+    
+    CLI.SetTextColour CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
+    CLI.Sendln "FOR EXAMPLE:"
+    CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
+    CLI.Sendln "hwz 1 14 FF0000 500 500 FFFFFF 90 " & _
+     Chr(34) & "Arial" & Chr(34) & " " & Chr(34) & "Text" & Chr(34)
+    CLI.Sendln ""
+    
+    CLI.SetTextColour CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE Or CLI.FOREGROUND_INTENSITY
+    CLI.Sendln "MANUAL:"
+    CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
+    CLI.Sendln "<out_mode> - Output mode. 4 modes currently supported"
+    CLI.Sendln vbTab + "* 1: Use VB6 inbuilt form -> image functions. Outputs .bmp file"
+    CLI.Sendln vbTab + "* 2: Use WinAPI effecient form -> image workarounds. Experimental"
+    CLI.Sendln vbTab + "* 3: Print out. Use in combination w/ virt. printer, e.g. doPDF"
+    CLI.Sendln vbTab + "* 4: Do&wait till form_click. Use w/ automation combo, e.g. AHK+doPDF"
+    CLI.Sendln ""
+    CLI.Sendln "<font_size> - Font size. 1-1368"
+    CLI.Sendln "<font_col> - Font colour. HEX notation, 000000-FFFFFF"
+    CLI.Sendln "<form_x> - Canvas width"
+    CLI.Sendln "<form_y> - Canvas height"
+    CLI.Sendln "<form_bg_col> - Canvas background colour. HEX notation, 000000-FFFFFF"
+    CLI.Sendln "<ang> - Angle in degrees. -359 - 359"
+    CLI.Sendln "<font> - Font name. Must be TrueType"
+    CLI.Sendln "<text> - Text to print"
+    API.quit API.ERR_SUCCESS
+End Sub
 

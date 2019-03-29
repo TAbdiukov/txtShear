@@ -23,6 +23,7 @@ Public Const OUT_ERR As Integer = 0
 Public Const OUT_IMG As Integer = 1
 Public Const OUT_WINAPI As Integer = 2
 Public Const OUT_PRN As Integer = 3
+Public Const OUT_PROC_AND_WAIT As Integer = 4
 
 '' Pseudo consts
 Public APP_NAME As String
@@ -333,12 +334,21 @@ Public Function HEXCOL2RGB(ByVal HexColor As String) As Long
 
 End Function
 
-
-Public Sub goto_VB_err()
+Public Sub printErr()
     CLI.Sendln "VB6 Error: " + CStr(Err.Number)
     CLI.Sendln Err.Description
     CLI.Sendln "    Dll Error:" + CStr(Err.LastDllError)
     CLI.Sendln "    At" + Err.Source
     API.quit API.ERR_VB
 End Sub
+
+' does mode such that is requires waiting for user?
+Public Function is_waiting_mode(ByVal mode As Integer) As Boolean
+    If (mode = OUT_PROC_AND_WAIT) Then
+        is_waiting_mode = True
+    Else
+        is_waiting_mode = False
+    End If
+End Function
+
 
