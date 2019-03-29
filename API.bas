@@ -267,6 +267,8 @@ Public Function OutputForm( _
             SaveFormImageToFile f, f.Picture1, outName + ".experimental"
         Case OUT_PRN:
             f.PrintForm
+        Case OUT_PROC_AND_WAIT
+            ' do nothing lol
         Case Else:
             CLI.Send "ERROR: invalid output mode"
             quit API.ERR_OUT
