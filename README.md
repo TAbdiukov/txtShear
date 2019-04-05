@@ -66,12 +66,10 @@ For help information, just run:
 
 * Or you can use the original Nirsoft's [Application Mode Changer](http://www.nirsoft.net/vb/console.zip) ([info](http://www.nirsoft.net/vb/console.html)), unpack the archive and then run the **appmodechange.exe**
 
-**Tip:** On my VM, for whatever reason the  **appmodechange.exe** fails to launch. As a workaround, you can run another **Microsoft Visual Basic 6.0** window, open up the **appmodechange.vbp** project, and then right from IDE, go to Run -> Run With Full Compile*
-
-6. Browse to your compiled copy of HWZ, pick *Console Application*, and then click on *Change Mode*.
-7. Done!
+6. Done!
 
 ## Example TrueType fonts
+
  1 | 2 | 3 | 4 
 ---|---|---|---
 Courier Arial | Arial CYR | Arial Cyr | Courier New | Courier New CYR
@@ -80,5 +78,3 @@ Times New Roman | Times New Roman CYR | Times New Roman Cyr | Symbol
 Verdana | Arial Black | Comic Sans MS |  Impact
 Georgia | Franklin | Gothic Medium |  Palatino Linotype
 Tahoma  | Trebuchet MS | Sylfaen | Microsoft Sans Serif
-	
-	
