@@ -1,30 +1,9 @@
 # HWZ
-**CLI TEXT SKEWER**
+![HMM](icons8-insulin-pen-96.png)**CLI TEXT SKEWER**
 
 A small but very fast Windows app to skew desired text to a desired angle, ultimately emulating handwriting
 
-## Backstory
-
-A few days ago I felt particularly curious about my pre-uni projects. And to my surprise, among trashy stuff I found something very peculiar. 
-
-I found an extremely unoptimised (even by VB6 standards), crashy **but working** VB6 app... to simulate handwriting. It made use of:
-
-* Different angles
-* Different fonts
-* Vertical and horizontal offsets
-* Different canvas sizes
-* Italics
-
-I find it really charming and naive that I thought I could do something like that... in VB6. Nevertheless, the idea is really unique, and the app made use of some really tricky&sneaky WinAPI combinations (which I likely copied from somewhere, the sources likely lost forever). So since the idea is pretty unique, I decided to rewrite the project, with the command-line in mind, so that one could write a nice and easy Python/Java/(paste your fav lingua here) wrapper for it. 
-
-Many old functions I had to rid off/merge/rewrite completely. I spent a few days (so far), implementing, cutting and rewriting, and by far I'm really happy with the result.
-
-Ironically, the biggest obstacle turned out to be... CLI input/output. But on the bright side I now know how to CLI in VB6.
-
-#### Naming
-The original project's name roughly said *"Hand-Writer-Z"* (what a name heh).So in honour of the old code, and at the same time for convenient command-line usage, I trunkated the name to *hwz*
-
-## Usage:
+## Usage
 Unfortunately, since we deal with Visual Basic, there is no (known) effecient way to handle args, so all args are required. Which is frankly to biggie for this kind of software
 
     hwz <out_mode> <font_size> <font_col> <form_x> <form_y>
@@ -78,3 +57,29 @@ Times New Roman | Times New Roman CYR | Times New Roman Cyr | Symbol
 Verdana | Arial Black | Comic Sans MS |  Impact
 Georgia | Franklin | Gothic Medium |  Palatino Linotype
 Tahoma  | Trebuchet MS | Sylfaen | Microsoft Sans Serif
+
+
+## Backstory
+
+A few days ago I felt particularly curious about my pre-uni projects. And to my surprise, among trashy stuff I found something very peculiar. 
+
+I found an extremely unoptimised (even by VB6 standards), crashy **but working** VB6 app... to simulate handwriting. It made use of:
+
+* Different angles
+* Different fonts
+* Vertical and horizontal offsets
+* Different canvas sizes
+* Italics
+
+I find it really charming and naive that I thought I could do something like that... in VB6. Nevertheless, the idea is really unique, and the app made use of some really tricky&sneaky WinAPI combinations (which I likely copied from somewhere, the sources likely lost forever). So since the idea is pretty unique, I decided to rewrite the project, with the command-line in mind, so that one could write a nice and easy Python/Java/(paste your fav lingua here) wrapper for it. 
+
+Many old functions I had to rid off/merge/rewrite completely. I spent a few days (so far), implementing, cutting and rewriting, and by far I'm really happy with the result.
+
+Ironically, the biggest obstacle turned out to be... CLI input/output. But on the bright side I now know how to CLI in VB6.
+
+Pen icon icon by Icons8
+
+( although I have the Icons8 licence from github 2019, best safe than sorry)
+
+#### Naming
+The original project's name roughly said *"Hand-Writer-Z"* (what a name heh).So in honour of the old code, and at the same time for convenient command-line usage, I trunkated the name to *hwz*
