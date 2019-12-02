@@ -1,7 +1,7 @@
 # HWZ
-![HMM](icons8-insulin-pen-96.png)**CLI TEXT SKEWER**
+**CLI TEXT SKEWER**
 
-A small but very fast Windows app to skew desired text to a desired angle, ultimately emulating handwriting
+![HMMZzzzzzzz](icons8-insulin-pen-96.png) A small but very fast Windows app to skew desired text to a desired angle, ultimately emulating handwriting
 
 ## Usage
 Unfortunately, since we deal with Visual Basic, there is no (known) effecient way to handle args, so all args are required. Which is frankly to biggie for this kind of software
