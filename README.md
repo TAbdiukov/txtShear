@@ -1,5 +1,5 @@
 # HWZ
-![HMMZzzzzzzz](icons8-insulin-pen-96.png) **CLI TEXT SKEWER**
+![icon](icons8-insulin-pen-96.png) **CLI TEXT SKEWER**
 
 A small but very fast Windows app to skew desired text to a desired angle, ultimately emulating handwriting
 
@@ -82,4 +82,4 @@ Pen icon icon by Icons8
 ( although I have the Icons8 licence from github 2019, best safe than sorry)
 
 #### Naming
-The original project's name roughly said *"Hand-Writer-Z"* (what a name heh).So in honour of the old code, and at the same time for convenient command-line usage, I trunkated the name to *hwz*
+The original project's name roughly said *"Hand-Writer-Z"*. So in honour of the old code, and at the same time for convenient command-line usage, I trunkated the name to *hwz*
