@@ -1,7 +1,7 @@
 # HWZ
 ![icon](icons8-insulin-pen-96.png) **CLI TEXT SKEWER**
 
-A small but very fast Windows app to skew desired text to a desired angle, ultimately emulating handwriting
+Tiny & fast Windows app to skew desired text to a desired angle, ultimately emulating handwriting
 
 ## Usage
 There is no (known) effecient way to handle args, so all args are required.
@@ -20,7 +20,7 @@ For help information, just run:
             * 1 - Use VB6 inbuilt form -> image functions. Outputs .bmp file
             * 2 - Use WinAPI effecient form -> image workarounds. Experimental
             * 3 - Print out. Use in combination w/ virt. printer, e.g. doPDF
-			* 4 - Do operations and then wait utill form_click (or until you kill the process). Use w/ automation tool combinations, e.g. AHK+PicPick
+			* 4 - Do operations and then wait utill form_click (or until you kill the process). Can be automated, e.g. AHK+PicPick
 
     <font_size> - Font size. 1-1368
     <font_col> - Font colour. HEX notation, 000000-FFFFFF
@@ -35,7 +35,7 @@ For help information, just run:
 1. *[Recommended for compatibility]* Get a Windows XP VM
 2. Get a **Microsoft Visual Basic 6.0** 
 
-***Tip:** I unofficially recommend a portable version sticking around on BT, as you won't have to mess around with the installation and registry. Plus, it's only a few megabytes. Check out **Portable Microsoft Visual Basic 6.0 SP6***
+***Tip:** I unofficially recommend a portable version sticking around on BT, as you won't have to deal with the installation and registry. Plus, it's only a few megabytes. Check out **Portable Microsoft Visual Basic 6.0 SP6***
 
 3. Fire up **Microsoft Visual Basic 6.0**, open up the project.
 4. Go to File -> Make *.exe -> Save
@@ -63,7 +63,7 @@ Tahoma  | Trebuchet MS | Sylfaen | Microsoft Sans Serif
 
 A few days ago I felt particularly curious about my pre-uni projects. And to my surprise, among trashy stuff I found something very peculiar. 
 
-I found an extremely unoptimised (even by VB6 standards), crashy **but working** VB6 app... to simulate handwriting. It made use of:
+I found an extremely unoptimised and unstable (even by VB6 standards), but functional VB6 app... to simulate handwriting. It made use of:
 
 * Different angles
 * Different fonts
