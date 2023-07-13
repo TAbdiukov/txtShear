@@ -71,9 +71,9 @@ I found an extremely unoptimised (even by VB6 standards), crashy **but working**
 * Different canvas sizes
 * Italics
 
-I find it really charming and naive that I thought I could do something like that... in VB6. Nevertheless, the idea is really unique, and the app made use of some really tricky&sneaky WinAPI combinations (which I likely copied from somewhere, the sources likely lost forever). So since the idea is pretty unique, I decided to rewrite the project, with the command-line in mind, so that one could write a nice and easy Python/Java/(paste your fav lingua here) wrapper for it. 
+I find it really charming and naive that I thought I could do something like that... in VB6. Nevertheless, the idea is really unique, and the app made use of some really tricky&sneaky WinAPI combinations (which I likely copied from somewhere, the sources likely lost forever). So since the idea is pretty unique, I decided to rewrite the project, with the command-line in mind. 
 
-Many old functions I had to rid off/merge/rewrite completely. I spent a few days (so far), implementing, cutting and rewriting, and by far I'm really happy with the result.
+Many old functions I had to rid off/merge/rewrite completely. I spent a few days (so far), implementing, refactoring and rewriting, and by far I'm really happy with the result.
 
 #### Naming
 The original project's name roughly said *"Hand-Writer-Z"*. So in honour of the old code, and at the same time for convenient command-line usage, I trunkated the name to *hwz*
