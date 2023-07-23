@@ -1,8 +1,6 @@
 # HWZ
 ![icon](icons8-insulin-pen-96.png) **CLI TEXT SKEWER**
-
-CLI engine to skew text to a desired angle, emulating handwriting.
-Tiny & fast Windows app
+Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
 
 ## Usage
 There is no (known) effecient way to handle args, so all args are required.
@@ -88,5 +86,5 @@ The original project's name roughly said *"Hand-Writer-Z"*. So in honour of the 
 
 * [AMC_patcher-CLI](https://github.com/TAbdiukov/AMC_patcher-CLI) – (CLI) Patches app's SUBSYSTEM flag to modify app's behavior.
 * [exe2wordsize](https://github.com/TAbdiukov/exe2wordsize) – (CLI) Detects Windows-compatible application bitness, without ever running it.
-* **<ins>HWZ</ins>** – (CLI) CLI engine to skew text to a desired angle, emulating handwriting.
+* **<ins>HWZ</ins>** – (CLI) Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
 * [SCAPTURE.EXE](https://github.com/TAbdiukov/SCAPTURE.EXE) – (GUI) Simple screen-capturing tool for embedded systems.
