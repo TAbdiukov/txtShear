@@ -84,6 +84,8 @@ Many old functions I had to rid off/merge/rewrite completely. I spent a few days
 #### Naming
 The original project's name roughly said *"Hand-Writer-Z"*. So in honour of the old code, and at the same time for convenient command-line usage, I trunkated the name to *hwz*
 
+* <ins>Update after 24 Feb 2022</ins> - The naming was done in the previous life, when `Z` was not yet a Nazi symbol. Something must be done to the project name.
+
 ## See also
 *My other small Windows tools,*  
 
