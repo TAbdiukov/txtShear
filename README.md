@@ -3,7 +3,7 @@
 
 Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
 
-[![Download](https://img.shields.io/badge/download-success?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TAbdiukov/HWZ/releases/download/1.45/hwz.exe)
+[![Download](https://img.shields.io/badge/download-success?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TAbdiukov/txtShear/releases/download/2.00/txtShear.exe)
 
 ## Usage
 All arguments are required due to VB6 limitations.
