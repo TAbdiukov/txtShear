@@ -22,7 +22,7 @@ For help information, just run:
             * 1 - Use VB6 inbuilt form -> image functions. Outputs .bmp file
             * 2 - Use WinAPI effecient form -> image workarounds. Experimental
             * 3 - Print out. Use in combination w/ virt. printer, e.g. doPDF
-			* 4 - Do operations and then wait utill form_click (or until you kill the process). Can be automated, e.g. AHK+PicPick
+            * 4 - Do operations and then wait utill form_click (or until you kill the process). Can be automated, e.g. AHK+PicPick
 
     <font_size> - Font size. 1-1368
     <font_col> - Font colour. HEX notation, 000000-FFFFFF
