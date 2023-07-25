@@ -1,4 +1,4 @@
-# HWZ
+# txtShear
 ![icon](icons8-insulin-pen-96.png) **CLI TEXT SKEWER**
 
 Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
@@ -6,16 +6,16 @@ Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
 [![Download](https://img.shields.io/badge/download-success?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TAbdiukov/HWZ/releases/download/1.45/hwz.exe)
 
 ## Usage
-There is no (known) effecient way to handle args, so all args are required.
+All arguments are required due to VB6 limitations.
 
-    hwz <out_mode> <font_size> <font_col> <form_x> <form_y>
+    txtShear <out_mode> <font_size> <font_col> <form_x> <form_y>
     <form_bg_col> <ang> "<font>" "<text>"
 For help information, just run:
 
-	hwz
+	txtShear
 
 ### For example:
-      hwz 1 14 FF0000 500 500 FFFFFF 90 "Arial" "Text"
+      txtShear 1 14 FF0000 500 500 FFFF00 90 "Arial" "Text"
 
 ### Manual:
     <out_mode> - Output mode. 4 modes currently supported
@@ -30,7 +30,7 @@ For help information, just run:
     <form_y> - Canvas height
     <form_bg_col> - Canvas background colour. HEX notation, 000000-FFFFFF
     <ang> - Angle in degrees. -359 - 359
-    <font> - Font name. Must be TrueType. To list TrueType fonts, run 'hwz list'
+    <font> - Font name. Must be TrueType. To list TrueType fonts, run 'txtShear list'
     <text> - Text to print
  
 ## How to compile
@@ -45,7 +45,7 @@ For help information, just run:
 	* You can use my [AMC patcher](https://github.com/TAbdiukov/AMC_patcher-CLI). For example,
 
 		```
-		amc C:\Projects\HWZ\hwz.exe 3
+		amc C:\Projects\txtShear\txtShear.exe 3
 		```
 		
 	* Or you can use the original Nirsoft's [Application Mode Changer](http://www.nirsoft.net/vb/console.zip) ([docs](http://www.nirsoft.net/vb/console.html)), unpack the archive and then run **appmodechange.exe**
@@ -81,15 +81,10 @@ I find it really charming and naive that I thought I could do something like tha
 
 Many old functions I had to rid off/merge/rewrite completely. I spent a few days (so far), implementing, refactoring and rewriting, and by far I'm really happy with the result.
 
-#### Naming
-The original project's name roughly said *"Hand-Writer-Z"*. So in honour of the old code, and at the same time for convenient command-line usage, I trunkated the name to *hwz*
-
-* <ins>Update after 24 Feb 2022</ins> - The naming was done in the previous life, when `Z` was not yet a Nazi symbol. Something must be done to the project name.
-
 ## See also
 *My other small Windows tools,*  
 
 * [AMC_patcher-CLI](https://github.com/TAbdiukov/AMC_patcher-CLI) – (CLI) Patches app's SUBSYSTEM flag to modify app's behavior.
 * [exe2wordsize](https://github.com/TAbdiukov/exe2wordsize) – (CLI) Detects Windows-compatible application bitness, without ever running it.
-* **<ins>HWZ</ins>** – (CLI) Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
 * [SCAPTURE.EXE](https://github.com/TAbdiukov/SCAPTURE.EXE) – (GUI) Simple screen-capturing tool for embedded systems.
+* **<ins>txtShear</ins>** – (CLI) Fast engine to skew (or shear) text by a desired angle, emulating handwriting.

@@ -205,8 +205,10 @@ End Function
 ' My wrapping of DrawStr
 Public Function DrawWrap(ByRef f As Form, ByRef d As draw_config)
  With d
-  f.Width = .FormX
-  f.Height = .FormY
+
+  f.Width = .FormX * Screen.TwipsPerPixelX
+  f.Height = .FormY * Screen.TwipsPerPixelY
+  
   'MsgBox Str(.FormBG)
   
   f.BackColor = .FormBG
@@ -215,7 +217,7 @@ Public Function DrawWrap(ByRef f As Form, ByRef d As draw_config)
   f.Font.Size = .FontSize
   f.ForeColor = .FontColour
   
-  DrawStr f.hdc, .txt, 0, 0, .Angle
+  DrawStr f.hdc, .txt, .FormX / 2, .FormY / 2, .Angle
  End With
 End Function
 
@@ -224,15 +226,14 @@ Public Function UnixTime() As Long
  ' UnixTime = DateDiff("S", "1/1/1970", now())
  ' approach 2: https://stackoverflow.com/a/52406421
  ' CLng(Format(Now(), "ms"))
- UnixTime = UnixTime = DateDiff("S", "1/1/1970", Now())
+ UnixTime = DateDiff("S", "1/1/1970", Now())
 End Function
 
 ' https://www.codeproject.com/Articles/23234/VB6-Save-Form-Image-To-File
 ' Used when output mode is OUT_WINAPI
 Public Sub SaveFormImageToFile(ByRef ContainerForm As Form, _
-          ByRef PictureBoxControl As PictureBox, _
-          ByVal ImageFileName As String)
-          
+                               ByRef PictureBoxControl As PictureBox, _
+                               ByVal ImageFileName As String)
   Dim FormInsideWidth As Long
   Dim FormInsideHeight As Long
   Dim PictureBoxLeft As Long
@@ -242,64 +243,67 @@ Public Sub SaveFormImageToFile(ByRef ContainerForm As Form, _
   Dim FormAutoRedrawValue As Boolean
   
   With PictureBoxControl
- 'Set PictureBox properties
- .Visible = False
- .AutoRedraw = True
- .Appearance = 0 ' Flat
- .AutoSize = False
- .BorderStyle = 0 'No border
- 
- 'Store PictureBox Original Size and location Values
- PictureBoxHeight = .Height: PictureBoxWidth = .Width
- PictureBoxLeft = .Left: PictureBoxTop = .Top
- 
- 'Make PictureBox to size to inside of form.
- .Align = vbAlignTop: .Align = vbAlignLeft
- DoEvents
- 
- FormInsideHeight = .Height: FormInsideWidth = .Width
- 
- 'Restore PictureBox Original Size and location Values
- .Align = vbAlignNone
- .Height = FormInsideHeight: .Width = FormInsideWidth
- .Left = PictureBoxLeft: .Top = PictureBoxTop
- 
- FormAutoRedrawValue = ContainerForm.AutoRedraw
- ContainerForm.AutoRedraw = False
- DoEvents
- 
- 'Copy Form Image to Picture Box
- BitBlt .hdc, 0, 0, _
- FormInsideWidth / Screen.TwipsPerPixelX, _
- FormInsideHeight / Screen.TwipsPerPixelY, _
- ContainerForm.hdc, 0, 0, _
- vbSrcCopy
- 
- DoEvents
- SavePicture .Image, ImageFileName
- DoEvents
- 
- ContainerForm.AutoRedraw = FormAutoRedrawValue
- DoEvents
+    'Set PictureBox properties
+    .Visible = False
+    .AutoRedraw = True
+    .Appearance = 0 ' Flat
+    .AutoSize = False
+    .BorderStyle = 0 'No border
+    
+    'Store PictureBox Original Size and location Values
+    PictureBoxHeight = .Height: PictureBoxWidth = .Width
+    PictureBoxLeft = .Left: PictureBoxTop = .Top
+    
+    'Make PictureBox to size to inside of form.
+    .Align = vbAlignTop: .Align = vbAlignLeft
+    DoEvents
+    
+    FormInsideHeight = .Height: FormInsideWidth = .Width
+    
+    'Restore PictureBox Original Size and location Values
+    .Align = vbAlignNone
+    .Height = FormInsideHeight: .Width = FormInsideWidth
+    .Left = PictureBoxLeft: .Top = PictureBoxTop
+    
+    FormAutoRedrawValue = ContainerForm.AutoRedraw
+    ContainerForm.AutoRedraw = False
+    DoEvents
+    
+    'Copy Form Image to Picture Box
+    BitBlt .hdc, 0, 0, _
+    FormInsideWidth * Screen.TwipsPerPixelX, _
+    FormInsideHeight * Screen.TwipsPerPixelY, _
+    ContainerForm.hdc, 0, 0, _
+    vbSrcCopy
+    
+    DoEvents
+    SavePicture .Image, ImageFileName
+    DoEvents
+    
+    ContainerForm.AutoRedraw = FormAutoRedrawValue
+    DoEvents
   End With
 End Sub
 
 Public Function OutputForm( _
  ByRef f As Form, ByVal mode As Integer, ByVal seed As Long)
-
  ' switch-case: https://stackoverflow.com/a/51016198
  Dim outName As String
- outName = APP_NAME + "_" + CStr(seed)
+ outName = APP_NAME + "_" + Hex(seed)
  
+ DoEvents
  Select Case mode
   Case OUT_IMG:
    SavePicture f.Image, outName + ".bmp"
   Case OUT_WINAPI:
-   SaveFormImageToFile f, f.Picture1, outName + ".experimental"
+   f.Show
+   SaveFormImageToFile f, f.Picture1, outName + ".exptl.bmp"
+   f.Hide
   Case OUT_PRN:
    f.PrintForm
   Case OUT_PROC_AND_WAIT
-   ' do nothing lol
+   f.Show
+   ' and then nothing lol
   Case Else:
    CLI.Send "ERROR: invalid output mode"
    quit API.ERR_OUT
@@ -321,7 +325,7 @@ End Function
 Public Sub setup()
  '' Generic
  
- APP_NAME = "hwz"
+ APP_NAME = "txtShear"
  DEBUGGER = GetRunningInIDE()
  VER = App.Major & "." & App.Minor & App.Revision
  
@@ -330,7 +334,6 @@ End Sub
 Public Function quit(code As Integer)
  On Error Resume Next
 
- CLI.Send vbNewLine
  CLI.Send vbNewLine
  
  If DEBUGGER Then
@@ -368,10 +371,7 @@ Public Function HEXCOL2RGB(ByVal HexColour As String) As Long
 End Function
 
 Public Sub printErr()
- CLI.Sendln "VB6 Error: " + CStr(Err.Number)
- CLI.Sendln Err.Description
- CLI.Sendln " Dll Error:" + CStr(Err.LastDllError)
- CLI.Sendln " At" + Err.Source
+ CLI.Send "Error #" + Str(Err.Number) + ": " + Err.Description
  API.quit API.ERR_VB
 End Sub
 

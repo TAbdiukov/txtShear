@@ -4,3 +4,5 @@
 Thumbs.db
 *.bmp
 *.png
+*.pdf
+!example.bmp
