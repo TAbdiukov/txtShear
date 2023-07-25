@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form Form1 
-   Caption         =   "hwz"
+   Caption         =   "txtShear"
    ClientHeight    =   2490
    ClientLeft      =   60
    ClientTop       =   450
@@ -69,11 +69,14 @@ End Sub
 
 Private Sub Form_Click()
  If (API.is_waiting_mode(OutMode_local)) Then
+  CLI.Send "Success"
   API.quit API.ERR_SUCCESS
  End If
 End Sub
 
 Private Sub Form_Load()
+ On Error GoTo ErrorHandler
+
  ' Initialise everything
  setup
  API.setup
@@ -138,6 +141,7 @@ Private Sub Form_Load()
    'MsgBox "6"
    
    Dim d As draw_config
+
    d = API.draw_config_construct(FormX_local, FormY_local, FormBG_local, _
     FontName_local, FontSize_local, FontColour_local, _
     Angle_local, txt_local)
@@ -152,14 +156,19 @@ Private Sub Form_Load()
    'MsgBox "8"
   Else
    CLI.Send "ERROR: Font is not a TrueType font (got: " _
-    + FontName_local + ")"
+    + FontName_local + ")" + vbNewLine + vbNewLine
+    
    show_TrueType_fonts
    API.quit API.ERR_NonTT
   End If
-   
+    
   ' FIN
-  CLI.Send "Success"
-  API.quit API.ERR_SUCCESS
+  If (API.is_waiting_mode(OutMode_local)) Then
+   GoTo EndThisSub
+  Else
+   CLI.Send "Success"
+   API.quit API.ERR_SUCCESS
+  End If
  ElseIf (argc = 1) Then
   If (LCase(argw(0)) = "list") Then
    show_TrueType_fonts
@@ -171,18 +180,25 @@ Private Sub Form_Load()
   
   API.quit API.ERR_ARGS
  End If
-  
+ 
+ Exit Sub
+ErrorHandler:
+  CLI.Send "Error #" + Str(Err.Number) + ": " + Err.Description
+  API.quit API.ERR_VB
+EndThisSub:
 End Sub
 
 Public Sub showHelp()
  CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_BLUE Or CLI.FOREGROUND_INTENSITY
- CLI.Sendln "HWZ - TEXT SKEWER" + " v" + VER
+ CLI.Sendln "txtShear" + " v" + VER
+ CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE Or CLI.FOREGROUND_INTENSITY
+ CLI.Sendln "Fast engine to skew (or shear) text by a desired angle, emulating handwriting."
  CLI.Sendln ""
  
  CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
  CLI.Sendln "USAGE:"
  CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
- CLI.Sendln "hwz <out_mode> <font_size> <font_col> " & _
+ CLI.Sendln "txtShear <out_mode> <font_size> <font_col> " & _
   "<form_x> <form_y> <frm_bg_col> <ang> " & _
   Chr(34) & "<font>" & Chr(34) & " " & Chr(34) & "<text>" & Chr(34)
  CLI.Sendln ""
@@ -190,7 +206,7 @@ Public Sub showHelp()
  CLI.SetTextColour CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_INTENSITY
  CLI.Sendln "FOR EXAMPLE:"
  CLI.SetTextColour CLI.FOREGROUND_RED Or CLI.FOREGROUND_GREEN Or CLI.FOREGROUND_BLUE
- CLI.Sendln "hwz 1 14 FF0000 500 500 FFFFFF 90 " & _
+ CLI.Sendln "txtShear 1 14 FF0000 500 500 FFFFFF 90 " & _
   Chr(34) & "Arial" & Chr(34) & " " & Chr(34) & "Text" & Chr(34)
  CLI.Sendln ""
  
@@ -203,6 +219,7 @@ Public Sub showHelp()
  CLI.Sendln vbTab + "* 3: Print out. Use in combination w/ virt. printer, e.g. doPDF"
  CLI.Sendln vbTab + "* 4: Do&wait till form_click. Use w/ automation combo, e.g. AHK+PicPick"
  CLI.Sendln ""
+ 
  CLI.Sendln "<font_size> - Font size. 1-1368"
  CLI.Sendln "<font_col> - Font colour. HEX notation, 000000-FFFFFF"
  CLI.Sendln "<form_x> - Canvas width"
@@ -210,8 +227,9 @@ Public Sub showHelp()
  CLI.Sendln "<form_bg_col> - Canvas background colour. HEX notation, 000000-FFFFFF"
  CLI.Sendln "<ang> - Angle in degrees. -359 - 359"
  CLI.Sendln "<font> - Font name. Must be TrueType"
- CLI.Sendln vbTab + "Tip: for Truetype fonts, run 'hwz list'"
+ CLI.Sendln vbTab + "Tip: for Truetype fonts, run 'txtShear list'"
  CLI.Sendln "<text> - Text to print"
+ CLI.Sendln ""
  
  show_TrueType_fonts
  API.quit API.ERR_SUCCESS
