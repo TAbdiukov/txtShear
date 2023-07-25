@@ -1,7 +1,5 @@
 # txtShear
-![icon](icons8-insulin-pen-96.png) **CLI TEXT SKEWER**
-
-Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
+![icon](icons8-insulin-pen-96.png) Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
 
 [![Download](https://img.shields.io/badge/download-success?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TAbdiukov/txtShear/releases/download/2.00/txtShear.exe)
 
