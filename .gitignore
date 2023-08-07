@@ -7,3 +7,4 @@ Thumbs.db
 *.pdf
 hwz.exe
 !example.bmp
+!sample_output.bmp
