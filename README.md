@@ -53,8 +53,8 @@ For help information, just run:
 
 ## Example TrueType fonts
 
- 1 | 2 | 3 |
----|---|---|
+1|2|3|
+-|-|-|
 Arial|Courier New|Lucida Console|
 Lucida Sans Unicode|Microsoft Sans Serif|Symbol|
 Tahoma|Times New Roman|Verdana|
