@@ -53,15 +53,11 @@ For help information, just run:
 
 ## Example TrueType fonts
 
- 1 | 2 | 3 | 4 
----|---|---|---
-Courier Arial | Arial CYR | Arial Cyr | Courier New | Courier New CYR
-Courier | Courier New Cyr | Lucida Console |  Lucida Sans Unicode 
-Times New Roman | Times New Roman CYR | Times New Roman Cyr | Symbol
-Verdana | Arial Black | Comic Sans MS |  Impact
-Georgia | Franklin | Gothic Medium |  Palatino Linotype
-Tahoma  | Trebuchet MS | Sylfaen | Microsoft Sans Serif
-
+ 1 | 2 | 3 |
+---|---|---|
+Arial|Courier New|Lucida Console|
+Lucida Sans Unicode|Microsoft Sans Serif|Symbol|
+Tahoma|Times New Roman|Verdana|
 
 ## Backstory
 
