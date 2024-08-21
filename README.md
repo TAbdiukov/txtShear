@@ -61,9 +61,7 @@ Tahoma|Times New Roman|Verdana|
 
 ## Backstory
 
-A few days ago, I felt particularly curious about my pre-uni projects, and found something very peculiar. 
-
-I found a functional VB6 app... to simulate handwriting. It made use of:
+A few days ago, I felt particularly curious about my pre-uni projects, and found something very peculiar.  I found my functional VB6 app... to simulate handwriting that made use of:
 
 * Different angles
 * Different fonts
@@ -71,7 +69,7 @@ I found a functional VB6 app... to simulate handwriting. It made use of:
 * Different canvas sizes
 * Italics
 
-I decided to rewrite the project, with the command-line in mind.
+I decided to rewrite the project, with the command-line support in mind.
 
 ## See also
 *My other small Windows tools,*  
