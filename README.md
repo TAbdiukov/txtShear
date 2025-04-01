@@ -76,5 +76,5 @@ I decided to rewrite the project, with the command-line support in mind.
 
 * [AMC_patcher-CLI](https://github.com/TAbdiukov/AMC_patcher-CLI) – (CLI) Patches app's SUBSYSTEM flag to modify app's behavior.
 * [exe2wordsize](https://github.com/TAbdiukov/exe2wordsize) – (CLI) Detects Windows-compatible application bitness, without ever running it.
-* [SCAPTURE.EXE](https://github.com/TAbdiukov/SCAPTURE.EXE) – (GUI) Simple screen-capturing tool for embedded systems.
+* [SCAPTURE](https://github.com/TAbdiukov/SCAPTURE) – (GUI) Simple screen-capturing tool for embedded systems.
 * **<ins>txtShear</ins>** – (CLI) Fast engine to skew (or shear) text by a desired angle, emulating handwriting.
